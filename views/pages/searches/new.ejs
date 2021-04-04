@@ -3,17 +3,20 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>search page</title>
+    <link rel="stylesheet" href="/style/base.css">
 </head>
 <body>
-    <form action="/new" method="GET">
+    
+    <h1>Search by Title or Author</h1>
+    <form action="/searches" method="POST">
         <fieldset>
-                <input type="text" placeholder="Enter a title or outher"><br>
+                <input type="text"name="search" placeholder="Enter a title or author"id="first"><br>
                 <label>Title
-                    <input type="radio" name="new" value="title">
+                    <input type="radio" name="contact" value="Title">
                   </label><br>
           
-                  <label>Title
-                    <input type="radio" name="new" value="Author">
+                  <label>Author
+                    <input type="radio" name="contact" value="Author">
                   </label><br>
                   <button>Search the Google Books API</button>
         </fieldset>

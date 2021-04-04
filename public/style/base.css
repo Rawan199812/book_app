@@ -1,3 +1,22 @@
-body{
-    background-color: rgb(158, 158, 245);
+*{
+    background-color: rgb(197, 197, 206);
+    font-size: 30px;
+    margin: 20px;
+}
+form{
+    text-align: center;
+}
+button{
+    background-color: black;
+    color: white;
+}
+h1{
+    text-align: center;
+    background-color: rgb(97, 95, 95);
+    padding: 20px;
+}
+#first{
+    background-color: white;
+    color: black;
+
 }
