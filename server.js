@@ -8,6 +8,8 @@ app.set('view engine', 'ejs');
 app.get('/', renderPage);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.get('/searches/new',(request,response)=> response.render('pages/searches/new'));
+
 function renderPage(request, response) {
     response.render('pages/index');
 }
