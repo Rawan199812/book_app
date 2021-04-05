@@ -20,12 +20,13 @@ function renderPage(req, res) {
  
   function search(req,res){
     let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-    if (req.body.contact === 'title') { url += `+intitle:${req.body.search[0]}`; }
-    if (req.body.contact === 'author') { url += `+inauthor:${req.body.search[0]}`; }
+    if (req.body.contact === 'Title') { url += `+intitle:${req.body.search[0]}`; }
+    if (req.body.contact === 'Author') { url += `+inauthor:${req.body.search[0]}`; }
     superagent.get(url)
       .then(searchRes => searchRes.body.items.map(element => new Book(element.volumeInfo)))
       .then(results => res.render('pages/searches/show', { allResault: results })).catch(error=>{
         res.render('pages/error',{err:error})
+        
     });
       
   }
