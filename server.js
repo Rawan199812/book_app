@@ -23,7 +23,7 @@ const NODE_ENV = process.env.NODE_ENV;
 // function renderPage(req, res) {
 //     res.render('pages/index');
 // }
-// const options = NODE_ENV === 'production' ? { connectionString: DATABASE_URL, ssl: { rejectUnauthorized: false } } : { connectionString: DATABASE_URL };
+const options = NODE_ENV === 'production' ? { connectionString: DATABASE_URL, ssl: { rejectUnauthorized: false } } : { connectionString: DATABASE_URL };
 
 const client = new pg.Client(process.env.DATABASE_URL);
 function renderAllBooks(req, res) {
