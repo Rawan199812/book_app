@@ -55,7 +55,8 @@ function seeDetails(req, res) {
     const sqlArr = [req.body.title, req.body.description, req.body.author, req.body.image_url]
     client.query(sqlQuery, sqlArr)
       .then(() => {
-        res.render('pages/books/show',{oneBook:[req.body]})
+        // res.render('pages/books/show',{oneBook:[req.body]})
+        res.redirect('/')
       });
 
 

@@ -3,6 +3,10 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/style/reset.css">
+    <link rel="stylesheet" href="/style/base.css">
+    <link rel="stylesheet" href="/style/layout.css">
+    <link rel="stylesheet" href="/style/modules.css">
 </head>
 <body>
     <form action="/"></form>
@@ -19,7 +23,7 @@
                     <input type="hidden" name="isbn" value="<%= book.isbn %>">
                     <input type="hidden" name="image" value="<%= book.image %>">
                     <input type="hidden" name="description" value="<%= book.description %>">
-                    <button type="submit" id="save-to-bookshelf">Select this Book</button>
+                    <button type="submit" id="save">Select this Book</button>
                   </form>
             </li>
         <% }) %>

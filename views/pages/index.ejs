@@ -13,8 +13,9 @@
       <!-- <h1>Hello World</h1> -->
       <h3>Saved Books<%= oneBook.length %> </h3>
      <ul>
-
-      <% oneBook.forEach(book => {%>
+       
+       <% oneBook.forEach(book => {%>
+        <li>
             <img src="<%= book.image_url %>" />
             <h2>
                 <%= book.title %>
@@ -27,6 +28,7 @@
             <!-- <a href="/id/<%= book.id %>"> View Details </a> -->
          
         <% }) %>
+      </li><br>
       </ul>
 
 
