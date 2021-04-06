@@ -2,12 +2,34 @@
 <html>
   <head>
     <title>Book App</title>
-    <link href="/style/base.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/style/reset.css">
+    <link rel="stylesheet" href="/style/base.css">
+    <link rel="stylesheet" href="/style/layout.css">
+    <link rel="stylesheet" href="/style/modules.css">
+
   </head>
   <body>
     <main>
-      <h1>Hello World</h1>
+      <!-- <h1>Hello World</h1> -->
+      <h3>Saved Books<%= oneBook.length %> </h3>
+     <ul>
+
+      <% oneBook.forEach(book => {%>
+            <img src="<%= book.image_url %>" />
+            <h2>
+                <%= book.title %>
+            </h2>
+            <p><%= book.author %></p>
+            <form action="/books/<%= book.id %>"  method="get">
+              <button>View Details</button>
+          </form>
+         
+            <!-- <a href="/id/<%= book.id %>"> View Details </a> -->
+         
+        <% }) %>
+      </ul>
+
 
     </main>
   </body>
-</html>
+</html> 
