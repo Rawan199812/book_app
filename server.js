@@ -56,7 +56,7 @@ function seeDetails(req, res) {
     client.query(sqlQuery, sqlArr)
       .then(() => {
         // res.render('pages/books/show',{oneBook:[req.body]})
-        res.redirect('/')
+         res.redirect('/')
       });
 
 
@@ -64,13 +64,17 @@ function seeDetails(req, res) {
   }
 
 }
+console.log('hi');
 function search(req, res) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   if (req.body.contact === 'Title') { url += `+intitle:${req.body.search[0]}`; }
   if (req.body.contact === 'Author') { url += `+inauthor:${req.body.search[0]}`; }
   superagent.get(url)
     .then(searchRes => searchRes.body.items.map(element => new Book(element.volumeInfo)))
-    .then(results => res.render('pages/searches/show', { allResault: results })).catch(error => {
+    .then(results =>
+     
+      { console.log(results)
+        res.render('pages/searches/show', { allResault: results })}).catch(error => {
       res.render('pages/error', { err: error })
 
     });
@@ -79,7 +83,7 @@ function Book(data) {
   this.image = data.imageLinks ? data.imageLinks.thumbnail : `https://i.imgur.com/J5LVHEL.jpg`;
   this.title = data.title;
   this.author = data.authors;
-  this.dicription = data.dicription;
+  this.description = data.description;
   booksArr.push(this);
   // console.log(this)
 }
