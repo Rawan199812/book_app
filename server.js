@@ -23,14 +23,13 @@ const NODE_ENV = process.env.NODE_ENV;
 // function renderPage(req, res) {
 //     res.render('pages/index');
 // }
-const options = NODE_ENV === 'production' ? { connectionString: DATABASE_URL, ssl: { rejectUnauthorized: false } } : { connectionString: DATABASE_URL };
 
 const client = new pg.Client(process.env.DATABASE_URL);
+
 function renderAllBooks(req, res) {
   const sqlQuery = `SELECT * FROM tasks;`;
-  client.query(sqlQuery).then(
-
-    result => {
+  client.query(sqlQuery)
+  .then(result => {
       // console.log(result.rows[0]);
       res.render('pages/index', { oneBook: result.rows })
     }
@@ -49,21 +48,23 @@ function seeDetails(req, res) {
     }).catch((error) => {
       errorHandler(`Error in getting Database ${error}`);
     });
+  }
   app.post('/books', addBook);
   function addBook(req, res) {
-    const sqlQuery = 'INSERT INTO tasks (title, description, author, image_url) VALUES ($1, $2, $3, $4) RETURNING id';
-    const sqlArr = [req.body.title, req.body.description, req.body.author, req.body.image_url]
+    
+    const sqlQuery = 'INSERT INTO tasks (author,title,isbn,image_url, description)  VALUES ($1, $2, $3, $4,$5) RETURNING id';
+
+    const sqlArr = [ req.body.authors,req.body.title,req.body.isbn, req.body.image_url,req.body.description]
     client.query(sqlQuery, sqlArr)
-      .then(() => {
-        // res.render('pages/books/show',{oneBook:[req.body]})
-         res.redirect('/')
+      .then((result) => {
+        res.redirect(`/books/${result.rows[0].id}`)
+        //  res.redirect('/')
       });
 
 
 
   }
 
-}
 console.log('hi');
 function search(req, res) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
@@ -81,9 +82,10 @@ function search(req, res) {
 }
 function Book(data) {
   this.image = data.imageLinks ? data.imageLinks.thumbnail : `https://i.imgur.com/J5LVHEL.jpg`;
-  this.title = data.title;
-  this.author = data.authors;
-  this.description = data.description;
+  this.title = data.title?data.title :'No title was found'
+  this.author = data.authors?data.authors:'....';
+  this.description = data.description?data.description :'No description was found';
+  this.isbn = data.industryIdentifiers ? `${data.industryIdentifiers[0].type} ${data.industryIdentifiers[0].identifier}` : 'No ISBN found';
   booksArr.push(this);
   // console.log(this)
 }

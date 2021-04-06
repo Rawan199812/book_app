@@ -11,19 +11,11 @@
       <ul>
       <% oneBook.forEach(book => {%>
        <li>
-            <img src="<%= book.image_url %>" alt="">
-            <h2>
-                <%= book.title %>
-            </h2>
-            <h5>
-                <%= book.authors %>
-            </h5>
-            <h4>
-                <%= book.isbn %>
-            </h4>
-            <p>
-                <%= book.description %>
-            </p>
+         <img src="<%= book.image_url %>" alt="">
+         <h2><%= book.title %></h2>
+         <h5><%= book.author %></h5>
+         <h4><%= book.isbn %></h4>
+         <p><%= book.description %></p>
         </form>
         </li>
         <% }) %>
