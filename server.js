@@ -5,18 +5,22 @@ const superagent = require('superagent');
 
 const app = express();
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 const DATABASE_URL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 // app.get('/', renderPage);
 app.use(express.static('public'));
 app.get('/', renderAllBooks);
 app.get('/searches/new', (req, res) => res.render('pages/searches/new'));
 app.post('/searches', search);
 app.get('/books/:id', seeDetails);
+app.put('/books/:id',updateBook);
+
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 const NODE_ENV = process.env.NODE_ENV;
 
@@ -65,7 +69,17 @@ function seeDetails(req, res) {
 
   }
 
-console.log('hi');
+function updateBook(req,res){
+    let id = req.params.id;
+    let { author,title, isbn, image_url, description} = req.body;
+    let SQL = `UPDATE tasks SET author=$1,title=$2,isbn=$3,image_url=$4,description=$5 WHERE id =$6;`;
+    let safeValues = [author,title, isbn, image_url, description,id];
+    client.query(SQL, safeValues)
+    .then(() => {
+        res.redirect(`/books/${id}`);
+    })
+
+}
 function search(req, res) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   if (req.body.contact === 'Title') { url += `+intitle:${req.body.search[0]}`; }

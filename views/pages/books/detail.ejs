@@ -16,11 +16,40 @@
          <h5><%= book.author %></h5>
          <h4><%= book.isbn %></h4>
          <p><%= book.description %></p>
-        </form>
+         <button>Delete Book</button>
+ 
+         <!-- <button id="update-out-form">Update Details</button> -->
+         <button id="updateBtn">Update Details</button>
+        
+         
+         
         </li>
+        <section id="updateForm">
+          <h2>Update Book!</h2>
+          <br>
+          <form action="/books/<%= book.id %>?_method=put" method="POST">
+            <input type="text" name="title" value="<%= book.title  %>" >
+            <br>
+            <input type="text" name="author" value="<%= book.authors %>">
+            <br>
+            <textarea name="description" cols="30" rows="10"><%= book.description %> </textarea>
+            <br>
+            <input type="text" name="isbn" value="<%= book.isbn %>">
+            <br>
+            <input type="text" name="image_url" value="<%= book.image_url %>">
+            <br>
+            <button id="upButton">Update Book Details</button> 
+          </form>
+          </section>
         <% }) %>
     </ul>
 
     </main>
+    <footer>
+
+    </footer>
+
   </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="./app.js"></script>
 </html>
