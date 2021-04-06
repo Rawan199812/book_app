@@ -13,13 +13,13 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-// app.get('/', renderPage);
 app.use(express.static('public'));
 app.get('/', renderAllBooks);
 app.get('/searches/new', (req, res) => res.render('pages/searches/new'));
 app.post('/searches', search);
 app.get('/books/:id', seeDetails);
 app.put('/books/:id',updateBook);
+app.delete('/books/:id',deleteBook);
 
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 const NODE_ENV = process.env.NODE_ENV;
@@ -44,11 +44,12 @@ function renderAllBooks(req, res) {
 function seeDetails(req, res) {
 
   let idN = req.params.id;
-  // console.log(idN);
+  console.log(idN);
   const sqlQuery = `SELECT * FROM tasks WHERE id=$1;`;
   client.query(sqlQuery, [idN])
     .then(result => {
       res.render('pages/books/show', { oneBook: result.rows });
+      console.log(result.rows);
     }).catch((error) => {
       errorHandler(`Error in getting Database ${error}`);
     });
@@ -58,15 +59,14 @@ function seeDetails(req, res) {
     
     const sqlQuery = 'INSERT INTO tasks (author,title,isbn,image_url, description)  VALUES ($1, $2, $3, $4,$5) RETURNING id';
 
-    const sqlArr = [ req.body.authors,req.body.title,req.body.isbn, req.body.image_url,req.body.description]
+    const sqlArr = [ req.body.author,req.body.title,req.body.isbn, req.body.image,req.body.description]
+    console.log(sqlArr);
     client.query(sqlQuery, sqlArr)
       .then((result) => {
+        
         res.redirect(`/books/${result.rows[0].id}`)
         //  res.redirect('/')
       });
-
-
-
   }
 
 function updateBook(req,res){
@@ -78,7 +78,15 @@ function updateBook(req,res){
     .then(() => {
         res.redirect(`/books/${id}`);
     })
+}
 
+function deleteBook(req,res){
+  let id =[req.params.id];
+  let SQL = `DELETE FROM tasks WHERE id=$1;`;
+  client.query(SQL,id)
+  .then(()=>{
+    res.redirect('/');
+  })
 }
 function search(req, res) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
@@ -88,7 +96,8 @@ function search(req, res) {
     .then(searchRes => searchRes.body.items.map(element => new Book(element.volumeInfo)))
     .then(results =>
      
-      { console.log(results)
+      { 
+        // console.log(results)
         res.render('pages/searches/show', { allResault: results })}).catch(error => {
       res.render('pages/error', { err: error })
 

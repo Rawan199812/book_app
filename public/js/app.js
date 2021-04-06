@@ -1,5 +1,5 @@
 'use strict';
-alert('Hello I am working');
+// alert('Hello I am working');
 $('#updateForm').hide();
 $('#updateBtn').on('click',function(){
     $('#updateForm').show();
