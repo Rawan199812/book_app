@@ -5,6 +5,7 @@
     <title>Document</title>
 </head>
 <body>
+    <form action="/"></form>
     <ul>
         <% allResault.forEach( book => { %>
             <li>
@@ -12,6 +13,14 @@
                 <h2><%= book.title %></h2>
                 <h3><%= book.author %></h3>
                 <p><%= book.dicription %></p>
+                <form action="/books" method="post">
+                    <input type="hidden" name="title" value="<%= book.title %>">
+                    <input type="hidden" name="author" value="<%= book.author %>">
+                    <input type="hidden" name="isbn" value="<%= book.isbn %>">
+                    <input type="hidden" name="image" value="<%= book.image %>">
+                    <input type="hidden" name="description" value="<%= book.description %>">
+                    <button type="submit" id="save-to-bookshelf">Select this Book</button>
+                  </form>
             </li>
         <% }) %>
         </ul>
