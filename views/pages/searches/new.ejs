@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>search page</title>
-    <link rel="stylesheet" href="/style/base.css">
-</head>
+    <%- include('../../layout/head',{page_title: 'Search Book'})%>
 <body>
-    
-    <h1>Search by Title or Author</h1>
+    <%-include('../../layout/header')%>
+   <main> 
+       <br>
+    <h2>Search by Title or Author</h2>
     <form action="/searches" method="POST">
         <fieldset>
                 <input type="text"name="search" placeholder="Enter a title or author"id="first"><br>
@@ -23,6 +21,6 @@
 
     </form>
 
-    
+</main> 
 </body>
 </html>
