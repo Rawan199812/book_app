@@ -29,11 +29,11 @@ const client = new pg.Client(process.env.DATABASE_URL);
 function renderAllBooks(req, res) {
   const sqlQuery = `SELECT * FROM tasks;`;
   client.query(sqlQuery)
-  .then(result => {
+    .then(result => {
       // console.log(result.rows[0]);
-      res.render('pages/index', { oneBook: result.rows })
+      res.render('pages/index', { oneBook: result.rows });
     }
-  )
+    );
 }
 // app.get('/',(req,res)=>res.send('work'))
 
@@ -48,22 +48,22 @@ function seeDetails(req, res) {
     }).catch((error) => {
       errorHandler(`Error in getting Database ${error}`);
     });
-  }
-  app.post('/books', addBook);
-  function addBook(req, res) {
-    
-    const sqlQuery = 'INSERT INTO tasks (author,title,isbn,image_url, description)  VALUES ($1, $2, $3, $4,$5) RETURNING id';
+}
+app.post('/books', addBook);
+function addBook(req, res) {
 
-    const sqlArr = [ req.body.authors,req.body.title,req.body.isbn, req.body.image_url,req.body.description]
-    client.query(sqlQuery, sqlArr)
-      .then((result) => {
-        res.redirect(`/books/${result.rows[0].id}`)
-        //  res.redirect('/')
-      });
+  const sqlQuery = 'INSERT INTO tasks (author,title,isbn,image_url, description)  VALUES ($1, $2, $3, $4,$5) RETURNING id';
+
+  const sqlArr = [ req.body.authors,req.body.title,req.body.isbn, req.body.image_url,req.body.description];
+  client.query(sqlQuery, sqlArr)
+    .then((result) => {
+      res.redirect(`/books/${result.rows[0].id}`);
+      //  res.redirect('/')
+    });
 
 
 
-  }
+}
 
 console.log('hi');
 function search(req, res) {
@@ -73,16 +73,16 @@ function search(req, res) {
   superagent.get(url)
     .then(searchRes => searchRes.body.items.map(element => new Book(element.volumeInfo)))
     .then(results =>
-     
-      { console.log(results)
-        res.render('pages/searches/show', { allResault: results })}).catch(error => {
-      res.render('pages/error', { err: error })
+
+    { console.log(results);
+      res.render('pages/searches/show', { allResault: results });}).catch(error => {
+      res.render('pages/error', { err: error });
 
     });
 }
 function Book(data) {
   this.image = data.imageLinks ? data.imageLinks.thumbnail : `https://i.imgur.com/J5LVHEL.jpg`;
-  this.title = data.title?data.title :'No title was found'
+  this.title = data.title?data.title :'No title was found';
   this.author = data.authors?data.authors:'....';
   this.description = data.description?data.description :'No description was found';
   this.isbn = data.industryIdentifiers ? `${data.industryIdentifiers[0].type} ${data.industryIdentifiers[0].identifier}` : 'No ISBN found';

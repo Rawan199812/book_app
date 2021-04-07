@@ -5,6 +5,7 @@
 }
 form{
     text-align: center;
+    border-radius: 10px;
 }
 button{
     background-color: black;
@@ -15,25 +16,28 @@ h1{
     background-color: rgb(97, 95, 95);
     padding: 20px;
 }
-#first{
-    background-color: white;
-    color: black;
 
-}
 li{
     margin-left: 300px;
     margin-right: 250px;
     padding: 50px;
     background-color: rgb(59, 59, 59);
 }
+
+#first{
+    background-color: white;
+    color: black;
+
+}
+
 img{
     width: 35%;
     margin-left: 150px;
 
 }
-h3{
-    text-align: center;
-}
 p{
     font-size: 15px;
+}
+h3{
+    text-align: center;
 }
