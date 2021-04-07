@@ -31,12 +31,14 @@ i{
     color: black;
 
 }
+
 li{
     margin-left: 300px;
     margin-right: 250px;
     padding: 50px;
     background-color: rgb(59, 59, 59);
 }
+
 img{
     width: 35%;
     margin-left: 150px;
@@ -47,5 +49,6 @@ p{
 }
 button{
     display: inline;
+    border-radius: 10px;
 }
 
