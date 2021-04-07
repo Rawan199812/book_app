@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Book App</title>
-    <link rel="stylesheet" href="/style/reset.css">
-    <link rel="stylesheet" href="/style/base.css">
-    <link rel="stylesheet" href="/style/layout.css">
-    <link rel="stylesheet" href="/style/modules.css">
-
-  </head>
+  <%- include('../layout/head',{page_title: 'Book Colection'})%>
   <body>
+    <%-include('../layout/header')%>
     <main>
       <!-- <h1>Hello World</h1> -->
       <h3>Saved Books<%= oneBook.length %> </h3>

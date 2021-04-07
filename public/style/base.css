@@ -2,18 +2,29 @@
     background-color: rgb(197, 197, 206);
     font-size: 20px;
     margin: 20px;
-}
-form{
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
 }
+
 button{
     background-color: black;
     color: white;
 }
+header{
+    background-color:black;
+    padding: 30px;
+    padding-top: 15px;
+
+}
 h1{
-    text-align: center;
-    background-color: rgb(97, 95, 95);
-    padding: 20px;
+   float: left;
+   color: white;
+   background-color: black;
+}
+i{
+    color: white;
+    float: right;
+    background-color: black;
 }
 #first{
     background-color: white;
@@ -31,12 +42,10 @@ img{
     margin-left: 150px;
 
 }
-h3{
-    text-align: center;
-}
 p{
     font-size: 15px;
 }
 button{
     display: inline;
 }
+
