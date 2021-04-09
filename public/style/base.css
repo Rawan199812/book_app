@@ -37,6 +37,7 @@ i{
     color: black;
 
 }
+
 li{
     display: block;
     margin-left: auto;
@@ -46,6 +47,7 @@ li{
     padding: 10px;
     background-color: rgb(197, 188, 188);
 }
+
 img{
     width: 35%;
     /* margin-left: 150px; */
@@ -57,12 +59,14 @@ img{
 p{
     font-size: 15px;
 }
+
 h6{
     background-color: rgb(80, 78, 78);
     color: white;
     padding: 30px;
     margin-bottom: 20px;
     
+
 }
 input[type=text]{
     color: black;

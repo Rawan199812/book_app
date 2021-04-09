@@ -22,8 +22,9 @@ app.get('/', (req,res)=>{
   client.query(sqlQuery)
     .then(result => {
       // console.log(result.rows[0]);
-      res.render('pages/index', { oneBook: result.rows })
+      res.render('pages/index', { oneBook: result.rows });
     }
+
     )
 });
 app.get('/searches/new', (req, res) => res.render('pages/searches/new'));
@@ -41,6 +42,7 @@ app.post('/searches', (req, res) => {
     }).catch(error => {
       res.render('pages/error', { err: error })
 
+
     });
 })
 
@@ -55,6 +57,7 @@ app.get('/books/:id', (req,res)=>{
     }).catch((error) => {
       errorHandler(`Error in getting Database ${error}`);
     });
+
 });
 app.put('/books/:id', (req,res)=>{
   let id = req.params.id;
@@ -66,6 +69,7 @@ app.put('/books/:id', (req,res)=>{
       res.redirect(`/books/${id}`);
     })
 });
+
 
 app.delete('/books/:id', (req,res)=>{
   let id = [req.params.id];
@@ -99,10 +103,10 @@ function Book(data) {
   this.title = data.title ? data.title : 'No title was found'
   this.author = data.authors ? data.authors : '....';
   this.description = data.description ? data.description : 'No description was found';
+
   this.isbn = data.industryIdentifiers ? `${data.industryIdentifiers[0].type} ${data.industryIdentifiers[0].identifier}` : 'No ISBN found';
   booksArr.push(this);
   // console.log(this)
 }
-let booksArr = [];
 
 client.connect().then(() => app.listen(PORT, () => console.log(`Listening on port: ${PORT}`)));
