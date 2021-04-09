@@ -108,5 +108,6 @@ function Book(data) {
   booksArr.push(this);
   // console.log(this)
 }
+let booksArr = [];
 
 client.connect().then(() => app.listen(PORT, () => console.log(`Listening on port: ${PORT}`)));
